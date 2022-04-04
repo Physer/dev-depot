@@ -53,4 +53,5 @@ services:
     ports:
       - 3000:80
       - 25:25
+    restart: always
     image: rnwood/smtp4dev
