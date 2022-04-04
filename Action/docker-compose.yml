@@ -48,3 +48,9 @@ services:
       - ${SQL_LOG_PATH}:/var/opt/mssql/log
     restart: always
     image: mcr.microsoft.com/mssql/server:latest
+  smtp4dev:
+    container_name: smtp4dev
+    ports:
+      - 3000:80
+      - 25:25
+    image: rnwood/smtp4dev
