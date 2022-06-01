@@ -1,0 +1,23 @@
+services:
+  azurite:
+    container_name: azurite
+    ports:
+      - 10000:10000
+      - 10001:10001
+      - 10002:10002
+    restart: always
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+  sql:
+    container_name: sql
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SQL_SA_PASSWORD}
+    user: root
+    hostname: ${SQL_HOSTNAME}
+    volumes:
+      - ${SQL_DATA_PATH}:/var/opt/mssql/data
+      - ${SQL_LOG_PATH}:/var/opt/mssql/log
+    restart: always
+    image: mcr.microsoft.com/mssql/server:latest
