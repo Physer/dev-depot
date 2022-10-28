@@ -1,0 +1,9 @@
+services:
+  ubuntu_desktop:
+    container_name: ubuntu_desktop
+    ports:
+      - 7999:80
+    volumes:
+      - ${UBUNTU_DESKTOP_FILE_SHARE}:/host_share
+    restart: always
+    image: dorowu/ubuntu-desktop-lxde-vnc

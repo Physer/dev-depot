@@ -15,16 +15,17 @@ Create your environment file specifying the necessary secrets (see [Environment 
 - [SQL](https://hub.docker.com/_/microsoft-mssql-server)
 
 ## Environment variables
-In order to make this compose file generic and accessible, you can create a `.env` file in the root folder of this repository.
+In order to make this compose file generic and accessible, you can create a `.env` file in the folder where your compose file is located.
 
 You can then fill this file with the following variables for use within the compose file:
-| Variable        | Definition                                                                                   | Container                      |
-|-----------------|----------------------------------------------------------------------------------------------|--------------------------------|
-| STFP_USERNAME   | A username for your sftp user                                                                | atmoz/sftp                     |
-| SFTP_PASSWORD   | The password for the previously mentioned user                                               | atmoz/sftp                     |
-| SFTP_ROOTFOLDER | The root folder that the user can upload to                                                  | atmoz/sftp                     |
-| SQL_SA_PASSWORD | The password for the SQL SA user                                                             | mcr.microsoft.com/mssql/server |
-| SQL_HOSTNAME    | The hostname of your SQL container                                                           | mcr.microsoft.com/mssql/server |
-| SQL_DATA_PATH   | A volume bind path for the data folder of your SQL container (where your .mdf files will be) | mcr.microsoft.com/mssql/server |
-| SQL_LOG_PATH    | A volume bind path for the log folder of your SQL container                                  | mcr.microsoft.com/mssql/server |
+| Variable                     | Definition                                                                                   | Container                      |
+|------------------------------|----------------------------------------------------------------------------------------------|--------------------------------|
+| STFP_USERNAME                | A username for your sftp user                                                                | atmoz/sftp                     |
+| SFTP_PASSWORD                | The password for the previously mentioned user                                               | atmoz/sftp                     |
+| SFTP_ROOTFOLDER              | The root folder that the user can upload to                                                  | atmoz/sftp                     |
+| SQL_SA_PASSWORD              | The password for the SQL SA user                                                             | mcr.microsoft.com/mssql/server |
+| SQL_HOSTNAME                 | The hostname of your SQL container                                                           | mcr.microsoft.com/mssql/server |
+| SQL_DATA_PATH                | A volume bind path for the data folder of your SQL container (where your .mdf files will be) | mcr.microsoft.com/mssql/server |
+| SQL_LOG_PATH                 | A volume bind path for the log folder of your SQL container                                  | mcr.microsoft.com/mssql/server |
+| UBUNTU_DESKTOP_FILE_SHARE    | A volume bind path for sharing data between the host and the desktop container               | dorowu/ubuntu-desktop-lxde-vnc |
 
