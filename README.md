@@ -13,6 +13,7 @@ Create your environment file specifying the necessary secrets (see [Environment 
 - [Seq](https://hub.docker.com/r/datalust/seq)
 - [SFTP](https://hub.docker.com/r/atmoz/sftp)
 - [SQL](https://hub.docker.com/_/microsoft-mssql-server)
+- [RabbitMQ](https://hub.docker.com/_/rabbitmq)
 
 ## Environment variables
 In order to make this compose file generic and accessible, you can create a `.env` file in the folder where your compose file is located.
@@ -28,4 +29,5 @@ You can then fill this file with the following variables for use within the comp
 | SQL_DATA_PATH                | A volume bind path for the data folder of your SQL container (where your .mdf files will be) | mcr.microsoft.com/mssql/server |
 | SQL_LOG_PATH                 | A volume bind path for the log folder of your SQL container                                  | mcr.microsoft.com/mssql/server |
 | UBUNTU_DESKTOP_FILE_SHARE    | A volume bind path for sharing data between the host and the desktop container               | dorowu/ubuntu-desktop-lxde-vnc |
-
+| RABBITMQ_DEFAULT_USER        | The username of the RabbitMQ user                                                            | rabbitmq                       |
+| RABBITMQ_DEFAULT_PASS        | The password of the RabbitMQ user                                                            | rabbitmq                       |

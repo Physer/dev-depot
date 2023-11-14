@@ -21,3 +21,13 @@ services:
       - ${SQL_LOG_PATH}:/var/opt/mssql/log
     restart: always
     image: mcr.microsoft.com/mssql/server:latest
+  rabbitmq:
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    restart: always
+    image: rabbitmq:management-alpine
