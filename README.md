@@ -4,7 +4,7 @@
 This repository houses my day-to-day local development setup so I can quickly get my required services up and running, regardless of my host's state
 
 ## Running the containers
-Create your environment file specifying the necessary secrets (see [Environment variables](#environment-variables)) and run `docker-compose up -d` or `docker-compose -p stack-name up -d`. For running one or more specific services you can run `docker-compose up -d [SERVICE]`. For an overview of service names, see the `docker-compose.yml` file.
+Create your environment file specifying the necessary secrets (see [Environment variables](#environment-variables)) and run `docker compose up -d` or `docker compose -p [PROJECT_NAME] up -d`. For running one or more specific services you can run `docker compose up -d [SERVICE]`. For an overview of service names, see the `compose.yaml` file.
 
 ## Containers
 - [Azurite](https://hub.docker.com/_/microsoft-azure-storage-azurite)
