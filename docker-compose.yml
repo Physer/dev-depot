@@ -1,0 +1,75 @@
+services:
+  redis-general-cache:
+    container_name: redis-cache
+    ports:
+      - 6379:6379
+    restart: always
+    image: redis:latest
+  redis-token-cache:
+    container_name: redis-tokens
+    ports:
+      - 6378:6379
+    restart: always
+    image: redis:latest
+  seq:
+    container_name: seq
+    ports:
+      - 5341:80
+    environment:
+      - ACCEPT_EULA=Y
+    restart: always
+    image: datalust/seq:latest
+  sftp:
+    container_name: sftp
+    ports:
+      - 22:22
+    restart: always
+    command: ${STFP_USERNAME}:${SFTP_PASSWORD}:::${SFTP_ROOTFOLDER}
+    image: atmoz/sftp:latest
+  smtp4dev:
+    container_name: smtp4dev
+    ports:
+      - 3000:80
+      - 25:25
+    restart: always
+    image: rnwood/smtp4dev
+  azurite:
+    container_name: azurite
+    ports:
+      - 10000:10000
+      - 10001:10001
+      - 10002:10002
+    restart: always
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+  sql:
+    container_name: sql
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SQL_SA_PASSWORD}
+    user: root
+    hostname: ${SQL_HOSTNAME}
+    volumes:
+      - ${SQL_DATA_PATH}:/var/opt/mssql/data
+      - ${SQL_LOG_PATH}:/var/opt/mssql/log
+    restart: always
+    image: mcr.microsoft.com/mssql/server:latest
+  rabbitmq:
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    restart: always
+    image: rabbitmq:management-alpine
+  ubuntu_desktop:
+    container_name: ubuntu_desktop
+    ports:
+      - 7999:80
+    volumes:
+      - ${UBUNTU_DESKTOP_FILE_SHARE}:/host_share
+    restart: always
+    image: dorowu/ubuntu-desktop-lxde-vnc
