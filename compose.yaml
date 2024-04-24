@@ -39,8 +39,12 @@ services:
       - 10000:10000
       - 10001:10001
       - 10002:10002
+    volumes:
+      - ${AZURITE_DATA_PATH}:/data
+      - ${AZURITE_CERT_PATH}:/certificates
     restart: always
     image: mcr.microsoft.com/azure-storage/azurite:latest
+    command: azurite --oauth basic --cert /certificates/${AZURITE_CERT_NAME} --key /certificates/${AZURITE_CERT_KEY_NAME}
   sql:
     container_name: sql
     ports:
