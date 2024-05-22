@@ -12,12 +12,9 @@ Create your environment file specifying the necessary secrets (see [Environment 
 
 - [Azurite](https://hub.docker.com/_/microsoft-azure-storage-azurite)
 - [RabbitMQ](https://hub.docker.com/_/rabbitmq)
-- [Redis (1)](https://hub.docker.com/_/redis)
-- [Redis (2)](https://hub.docker.com/_/redis)
-- [Seq](https://hub.docker.com/r/datalust/seq)
+- [Redis](https://hub.docker.com/_/redis)
 - [SFTP](https://hub.docker.com/r/atmoz/sftp)
 - [SQL](https://hub.docker.com/_/microsoft-mssql-server)
-- [Ubuntu Desktop](https://hub.docker.com/r/dorowu/ubuntu-desktop-lxde-vnc)
 
 ## Environment variables
 
@@ -33,8 +30,6 @@ You can then fill this file with the following variables for use within the comp
 | SQL_HOSTNAME              | The hostname of your SQL container                                                           | mcr.microsoft.com/mssql/server          |
 | SQL_DATA_PATH             | A volume bind path for the data folder of your SQL container (where your .mdf files will be) | mcr.microsoft.com/mssql/server          |
 | SQL_LOG_PATH              | A volume bind path for the log folder of your SQL container                                  | mcr.microsoft.com/mssql/server          |
-| UBUNTU_DESKTOP_FILE_SHARE | A volume bind path for sharing data between the host and the desktop container               | dorowu/ubuntu-desktop-lxde-vnc          |
 | RABBITMQ_DEFAULT_USER     | The username of the RabbitMQ user                                                            | rabbitmq                                |
 | RABBITMQ_DEFAULT_PASS     | The password of the RabbitMQ user                                                            | rabbitmq                                |
 | AZURITE_DATA_PATH         | A volume bind path for the data folder of your Azurite container                             | mcr.microsoft.com/azure-storage/azurite |
-| AZURITE_CERT_PATH         | A volume bind path for the PEM certificates for Azurite                                      | mcr.microsoft.com/azure-storage/azurite |

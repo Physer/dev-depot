@@ -1,31 +1,19 @@
 services:
-  redis-general-cache:
-    container_name: redis-cache
+  redis:
+    container_name: redis
     ports:
       - 6379:6379
     restart: always
     image: redis:latest
-  redis-token-cache:
-    container_name: redis-tokens
-    ports:
-      - 6378:6379
-    restart: always
-    image: redis:latest
-  seq:
-    container_name: seq
-    ports:
-      - 5341:80
-    environment:
-      - ACCEPT_EULA=Y
-    restart: always
-    image: datalust/seq:latest
+
   sftp:
     container_name: sftp
     ports:
       - 22:22
     restart: always
-    command: ${STFP_USERNAME}:${SFTP_PASSWORD}:::${SFTP_ROOTFOLDER}
     image: atmoz/sftp:latest
+    command: ${STFP_USERNAME}:${SFTP_PASSWORD}:::${SFTP_ROOTFOLDER}
+
   smtp4dev:
     container_name: smtp4dev
     ports:
@@ -33,6 +21,7 @@ services:
       - 25:25
     restart: always
     image: rnwood/smtp4dev
+
   azurite:
     container_name: azurite
     ports:
@@ -41,10 +30,10 @@ services:
       - 10002:10002
     volumes:
       - ${AZURITE_DATA_PATH}:/data
-      - ${AZURITE_CERT_PATH}:/certificates
     restart: always
     image: mcr.microsoft.com/azure-storage/azurite:latest
-    command: azurite --oauth basic --cert /certificates/${AZURITE_CERT_NAME} --key /certificates/${AZURITE_CERT_KEY_NAME}
+    command: azurite -l /data --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0
+
   sql:
     container_name: sql
     ports:
@@ -59,6 +48,7 @@ services:
       - ${SQL_LOG_PATH}:/var/opt/mssql/log
     restart: always
     image: mcr.microsoft.com/mssql/server:latest
+
   rabbitmq:
     container_name: rabbitmq
     ports:
@@ -69,44 +59,3 @@ services:
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
     restart: always
     image: rabbitmq:management-alpine
-  ubuntu_desktop:
-    container_name: ubuntu_desktop
-    ports:
-      - 7999:80
-    volumes:
-      - ${UBUNTU_DESKTOP_FILE_SHARE}:/host_share
-    restart: always
-    image: dorowu/ubuntu-desktop-lxde-vnc
-  sonarqube:
-    container_name: sonarqube
-    ports:
-      - "9000:9000"
-    environment:
-      SONAR_JDBC_URL: jdbc:postgresql://sonarqube_database:5432/sonar
-      SONAR_JDBC_USERNAME: sonar
-      SONAR_JDBC_PASSWORD: sonar
-    volumes:
-      - sonarqube_data:/opt/sonarqube/data
-      - sonarqube_extensions:/opt/sonarqube/extensions
-      - sonarqube_logs:/opt/sonarqube/logs
-    restart: always
-    image: sonarqube:community
-    depends_on:
-      - sonarqube_db
-  sonarqube_db:
-    container_name: sonarqube_database
-    environment:
-      POSTGRES_USER: sonar
-      POSTGRES_PASSWORD: sonar
-    volumes:
-      - sonarqube_db:/var/lib/postgresql
-      - sonarqube_db_data:/var/lib/postgresql/data
-    restart: always
-    image: postgres:12
-
-volumes:
-  sonarqube_data:
-  sonarqube_extensions:
-  sonarqube_logs:
-  sonarqube_db:
-  sonarqube_db_data:
