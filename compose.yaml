@@ -59,3 +59,10 @@ services:
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
     restart: always
     image: rabbitmq:management-alpine
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - ${DOCKER_SOCK_PATH}:/var/run/docker.sock
+    restart: always
