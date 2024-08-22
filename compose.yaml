@@ -61,8 +61,18 @@ services:
     image: rabbitmq:management-alpine
 
   watchtower:
-    image: containrrr/watchtower
     container_name: watchtower
     volumes:
       - ${DOCKER_SOCK_PATH}:/var/run/docker.sock
     restart: always
+    image: containrrr/watchtower:latest
+
+  cosmos:
+    container_name: cosmos
+    ports:
+      - 8081:8081
+      - 10250-10255:10250-10255
+    environment:
+      - AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE=true
+    restart: always
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
