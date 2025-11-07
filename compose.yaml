@@ -76,3 +76,10 @@ services:
       - AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE=true
     restart: always
     image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+
+  stirling-pdf:
+    container_name: stirling-pdf
+    ports:
+      - 8080
+    restart: always
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
