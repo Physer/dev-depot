@@ -62,6 +62,9 @@ services:
 
   watchtower:
     container_name: watchtower
+    environment:
+      - WATCHTOWER_UPDATE_ON_START=true
+      - WATCHTOWER_CLEANUP=true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
