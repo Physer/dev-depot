@@ -65,7 +65,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
-    image: containrrr/watchtower:latest
+    image: nickfedor/watchtower:latest
 
   cosmos:
     container_name: cosmos
@@ -119,3 +119,5 @@ services:
               capabilities: [gpu]
     extra_hosts:
       - host.docker.internal:host-gateway
+    depends_on:
+      - ollama
