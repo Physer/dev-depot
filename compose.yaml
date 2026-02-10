@@ -6,14 +6,6 @@ services:
     restart: always
     image: redis:latest
 
-  sftp:
-    container_name: sftp
-    ports:
-      - 22:22
-    restart: always
-    image: atmoz/sftp:latest
-    command: ${STFP_USERNAME}:${SFTP_PASSWORD}:::${SFTP_ROOTFOLDER}
-
   smtp4dev:
     container_name: smtp4dev
     ports:
@@ -29,7 +21,7 @@ services:
       - 10001:10001
       - 10002:10002
     volumes:
-      - ${AZURITE_DATA_PATH}:/data
+      - azurite_data:/data
     restart: always
     image: mcr.microsoft.com/azure-storage/azurite:latest
     command: azurite -l /data --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0
@@ -42,12 +34,12 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=${SQL_SA_PASSWORD}
     user: root
-    hostname: ${SQL_HOSTNAME}
+    hostname: localhost
     volumes:
-      - ${SQL_DATA_PATH}:/var/opt/mssql/data
-      - ${SQL_LOG_PATH}:/var/opt/mssql/log
+      - sql_data:/var/opt/mssql/data
+      - sql_log:/var/opt/mssql/log
     restart: always
-    image: mcr.microsoft.com/mssql/server:latest
+    image: mcr.microsoft.com/mssql/server:2025-latest
 
   rabbitmq:
     container_name: rabbitmq
@@ -92,7 +84,7 @@ services:
     ports:
       - 11434:11434
     volumes:
-      - ${OLLAMA_DATA_PATH}:/root/.ollama
+      - ollama_data:/root/.ollama
     restart: always
     image: ollama/ollama:latest
     deploy:
@@ -110,7 +102,7 @@ services:
     environment:
       - WEBUI_AUTH=False
     volumes:
-      - ${OPEN_WEBUI_DATA_PATH}:/app/backend/data
+      - open_webui_data:/app/backend/data
     restart: always
     image: ghcr.io/open-webui/open-webui:main
     deploy:
@@ -124,3 +116,10 @@ services:
       - host.docker.internal:host-gateway
     depends_on:
       - ollama
+
+volumes:
+  sql_data:
+  sql_log:
+  azurite_data:
+  ollama_data:
+  open_webui_data:
