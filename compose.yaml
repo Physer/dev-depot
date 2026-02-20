@@ -117,6 +117,19 @@ services:
     depends_on:
       - ollama
 
+  dockpeek:
+    container_name: dockpeek
+    ports:
+      - 8000:8000
+    environment:
+      - SECRET_KEY=${DOCKPEEK_SECRET}
+      - USERNAME=${DOCKPEEK_USERNAME}
+      - PASSWORD=${DOCKPEEK_PASSWORD}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    image: dockpeek/dockpeek:latest
+
 volumes:
   sql_data:
   sql_log:
